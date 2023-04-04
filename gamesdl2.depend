@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1680113796 source:c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.cpp
+	"commonfunc.h"
+
+1680537965 c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.h
+	<windows.h>
+	<string>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	<iostream>
+
+1680114949 source:c:\users\admin\downloads\flappybird\gamesdl2\baseobject.cpp
+	"baseobject.h"
+
+1680133672 c:\users\admin\downloads\flappybird\gamesdl2\baseobject.h
+	"commonfunc.h"
+
+1680534781 source:c:\users\admin\downloads\flappybird\gamesdl2\main.cpp
+	<iostream>
+	"commonfunc.h"
+	"baseobject.h"
+	"gamemap1.h"
+	"mainobject.h"
+	"Imptimer.h"
+
+1680217577 source:c:\users\admin\downloads\flappybird\gamesdl2\gamemap.cpp
+	"gamemap1.h"
+
+1680204072 c:\users\admin\downloads\flappybird\gamesdl2\gamemap1.h
+	"commonfunc.h"
+	"baseobject.h"
+
+1680536735 c:\users\admin\downloads\flappybird\gamesdl2\mainobject.h
+	"commonfunc.h"
+	"baseobject.h"
+
+1680536256 source:c:\users\admin\downloads\flappybird\gamesdl2\mainobject.cpp
+	"mainobject.h"
+	<string>
+
+1680221054 c:\users\admin\downloads\flappybird\gamesdl2\imptimer.h
+
+1680248218 source:c:\users\admin\downloads\flappybird\gamesdl2\imptimer.cpp
+	"Imptimer.h"
+	"commonfunc.h"
+
