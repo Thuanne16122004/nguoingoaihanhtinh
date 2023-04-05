@@ -4,6 +4,7 @@
 #include"gamemap1.h"
 #include"mainobject.h"
 #include"Imptimer.h"
+#include"bullerobject.h"
 
 
 BaseObject g_background;
@@ -45,7 +46,7 @@ bool InitData()
 
 bool LoadBackground()
 {
-    bool ret = g_background.LoadImageA("img//background.png", g_screen);
+    bool ret = g_background.LoadImageA("img//backgroundnen.png", g_screen);
     if (ret == false)
         return false;
 
@@ -107,6 +108,7 @@ int main (int argc, char* argv[])
     game_map.DrawMap(g_screen);
     Map map_data= game_map.getMap();
 
+    p_player.HandleBuller(g_screen);
     p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
     p_player.DoPlayer(map_data);
     p_player.Show(g_screen);
@@ -132,4 +134,5 @@ int main (int argc, char* argv[])
 
     close();
     return 0;
+
 }

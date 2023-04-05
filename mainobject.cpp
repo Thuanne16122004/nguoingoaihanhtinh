@@ -5,7 +5,7 @@ MainObject::MainObject()
 {
     frame_ =0;
     x_pos_ =200;
-    y_pos_ =4000;
+    y_pos_ =8500;
     x_val_ =0;
     y_val_ =0;
     width_frame_ =0;
@@ -128,7 +128,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
     {
         switch (events.key.keysym.sym)
         {
-        case SDLK_RIGHT:
+        case SDLK_d:
             {
                 status_ =WALK_RIGHT;
                 input_type_.right_ =1;
@@ -136,7 +136,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 
             }
             break;
-            case SDLK_LEFT:
+            case SDLK_a:
             {
                 status_ =WALK_LEFT;
                 input_type_.left_ =1;
@@ -144,7 +144,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 
             }
             break;
-            case SDLK_UP:
+            case SDLK_w:
                 {
 
                     input_type_.jump_ =1;
@@ -157,14 +157,14 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
     {
       switch (events.key.keysym.sym)
         {
-        case SDLK_RIGHT:
+        case SDLK_d :
             {
 
                 input_type_.right_ =0;
 
             }
             break;
-            case SDLK_LEFT:
+            case SDLK_a:
             {
 
                 input_type_.left_ =0;
@@ -174,13 +174,61 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 
         }
     }
+
     if (events.type == SDL_MOUSEBUTTONDOWN)
     {
         if (events.button.button == SDL_BUTTON_RIGHT)
         {
               input_type_.jump_ =1;
         }
+        else if (events.button.button == SDL_BUTTON_LEFT)
+        {
+            BullerObject* p_buller =new BullerObject();
+            p_buller->LoadImageA("img//lazer.png", screen);
+
+            if(status_== WALK_LEFT)
+            {
+               p_buller ->set_buller_dir(BullerObject::DIR_LEFT);
+               p_buller->SetRect(this->rect_.x-24,rect_.y+20);
+            }
+            else
+            {
+                p_buller->set_buller_dir(BullerObject::DIR_RIGHT);
+                p_buller->SetRect(this->rect_.x+24,rect_.y+20);
+            }
+
+            p_buller->SetRect(this->rect_.x+24,rect_.y+20);
+            p_buller->set_x_val(20);
+            p_buller->set_is_move(true);
+            p_buller_list_.push_back(p_buller);
+
+        }
     }
+}
+
+void MainObject::HandleBuller(SDL_Renderer*  des)
+{
+   for(int i=0; i<p_buller_list_.size();i++)
+   {
+       BullerObject* p_buller = p_buller_list_.at(i);
+       if(p_buller != NULL)
+       {
+           if (p_buller->get_is_move()==true)
+           {
+               p_buller->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT);
+               p_buller->Render(des);
+           }
+           else
+           {
+               p_buller_list_.erase(p_buller_list_.begin()+i);
+               if(p_buller!= NULL)
+               {
+                   delete p_buller;
+                   p_buller =NULL;
+               }
+           }
+       }
+   }
 }
 
 void MainObject::DoPlayer(Map& map_data)
@@ -205,7 +253,7 @@ void MainObject::DoPlayer(Map& map_data)
         if(on_ground_ == true)
         {
 
-        y_val_-=PLAYER_JUMP_VAL;
+        y_val_=+PLAYER_JUMP_VAL;
 
 
         }

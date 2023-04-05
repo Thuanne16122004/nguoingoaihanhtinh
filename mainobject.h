@@ -5,9 +5,10 @@
 #include"commonfunc.h"
 #include"baseobject.h"
 #include"bullerobject.h"
+
 #define GRAVITY_SPEED 20
-#define MAX_FALL_SPEED 20
-#define PLAYER_SPEED 20
+#define MAX_FALL_SPEED 16
+#define PLAYER_SPEED 15
 #define PLAYER_JUMP_VAL 150
 class MainObject : public BaseObject
 {
@@ -33,9 +34,18 @@ public:
     void SetMapXY(const int map_x, int const map_y){map_x_ =map_x; map_y_=map_y;}
     void CenterEntityOnMap(Map& map_data);
 
+    void set_buller_list(std::vector<BullerObject*>buller_list)
+    {
+        p_buller_list_=buller_list;
+
+
+     }
+    std::vector<BullerObject*> get_buller_list() const {return p_buller_list_;}
+    void HandleBuller(SDL_Renderer*  des);
+
 private:
 
-    std::vector<BullerObject*> p_bulle
+    std::vector<BullerObject*> p_buller_list_;
     float x_val_;
     float y_val_;
 
