@@ -16,6 +16,7 @@ class BaseObject
     virtual bool LoadImageA(std:: string path,SDL_Renderer* screen);
     void Render(SDL_Renderer* des, const SDL_Rect* clip =NULL);
     void Free();
+
     protected:
         SDL_Texture* p_object_;
         SDL_Rect rect_;

@@ -42,6 +42,7 @@ void BaseObject::Render(SDL_Renderer* des, const SDL_Rect* clip/* = NULL */)
  }
 
 
+
  void BaseObject::Free()
  {
      if(p_object_ != NULL)

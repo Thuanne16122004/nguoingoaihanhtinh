@@ -6,9 +6,9 @@
 #include"baseobject.h"
 #include"bullerobject.h"
 
-#define GRAVITY_SPEED 20
-#define MAX_FALL_SPEED 16
-#define PLAYER_SPEED 15
+#define GRAVITY_SPEED 25
+#define MAX_FALL_SPEED 10
+#define PLAYER_SPEED 20
 #define PLAYER_JUMP_VAL 150
 class MainObject : public BaseObject
 {
@@ -33,6 +33,8 @@ public:
     void CheckToMap(Map& map_data);
     void SetMapXY(const int map_x, int const map_y){map_x_ =map_x; map_y_=map_y;}
     void CenterEntityOnMap(Map& map_data);
+    SDL_Rect GetRectFrame();
+
 
     void set_buller_list(std::vector<BullerObject*>buller_list)
     {
@@ -63,6 +65,8 @@ private:
 
     int map_x_;
     int map_y_;
+
+    int come_back_time_;
 };
 
 #endif // MAINOBJECT_H_INCLUDED

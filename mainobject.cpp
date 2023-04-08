@@ -4,7 +4,7 @@
 MainObject::MainObject()
 {
     frame_ =0;
-    x_pos_ =200;
+    x_pos_ =500;
     y_pos_ =8500;
     x_val_ =0;
     y_val_ =0;
@@ -19,6 +19,7 @@ MainObject::MainObject()
     on_ground_ = false;
     map_x_ =0;
     map_y_ =0;
+    come_back_time_=0;
 }
 
 
@@ -40,6 +41,18 @@ bool MainObject::LoadImageA(std::string path,SDL_Renderer* screen)
     }
     return ret;
 }
+
+SDL_Rect MainObject::GetRectFrame()
+{
+    SDL_Rect rect;
+    rect.x=rect_.x;
+    rect.y=rect_.y;
+    rect.w=width_frame_;
+    rect.h=height_frame_;
+
+    return rect;
+}
+
 void MainObject::set_clips()
 {
     if (width_frame_ >0 && height_frame_ >0)
@@ -108,7 +121,7 @@ void MainObject::Show(SDL_Renderer* des)
         frame_ =0;
     }
 
-    if (frame_ >=8 *1)
+    if (frame_ >=8 *4)
     {
         frame_ =0;
     }
@@ -116,7 +129,7 @@ void MainObject::Show(SDL_Renderer* des)
     rect_.x =x_pos_ - map_x_;
     rect_.y =y_pos_ - map_y_;
 
-    SDL_Rect* current_clip =&frame_clip_[frame_ / 1];
+    SDL_Rect* current_clip =&frame_clip_[frame_ / 4];
     SDL_Rect renderQuad ={rect_.x,rect_.y,width_frame_,height_frame_};
 
     SDL_RenderCopy(des, p_object_, current_clip, &renderQuad);
@@ -148,6 +161,12 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
                 {
 
                     input_type_.jump_ =1;
+                }
+                break;
+                case SDLK_s:
+                {
+
+                    input_type_.down_ =1;
                 }
                 break;
 
@@ -198,7 +217,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
             }
 
             p_buller->SetRect(this->rect_.x+24,rect_.y+20);
-            p_buller->set_x_val(20);
+            p_buller->set_x_val(10);
             p_buller->set_is_move(true);
             p_buller_list_.push_back(p_buller);
 
@@ -233,7 +252,9 @@ void MainObject::HandleBuller(SDL_Renderer*  des)
 
 void MainObject::DoPlayer(Map& map_data)
 {
-    x_val_ =0;
+    if(come_back_time_==0)
+    {
+        x_val_ =0;
     y_val_ +=GRAVITY_SPEED;
 
     if(y_val_>= MAX_FALL_SPEED)
@@ -253,16 +274,40 @@ void MainObject::DoPlayer(Map& map_data)
         if(on_ground_ == true)
         {
 
-        y_val_=+PLAYER_JUMP_VAL;
+        y_val_-=PLAYER_JUMP_VAL;
 
 
         }
         on_ground_ =false;
         input_type_.jump_=0;
     }
+    if (  input_type_.down_ ==1)
+    {
+        if(on_ground_ == true)
+        {
+
+        y_val_+=150;
+
+
+        }
+        on_ground_ =false;
+        input_type_.down_=0;
+    }
 
     CheckToMap(map_data);
     CenterEntityOnMap(map_data);
+
+    }
+    if(come_back_time_>0)
+    {
+        come_back_time_--;
+        if (come_back_time_==0)
+        {
+            y_pos_=8500;
+            x_pos_=500;
+        }
+    }
+
 }
 
 void MainObject::CenterEntityOnMap(Map& map_data)
@@ -303,7 +348,7 @@ void MainObject::CheckToMap(Map& map_data)
     x2 = (x_pos_+x_val_+width_frame_ -1)/TILE_SIZE;
 
     y1 =(y_pos_)/TILE_SIZE;
-    y2 =(y_pos_+height_min -1)/TILE_SIZE;
+    y2 =(y_pos_+height_min -10)/TILE_SIZE;
 
     if (x1>=0 && x2< MAX_MAP_X && y1>=0 && y2< MAX_MAP_Y)
     {
@@ -365,6 +410,13 @@ void MainObject::CheckToMap(Map& map_data)
     else if (x_pos_ + width_frame_ >map_data.max_x_ )
     {
         x_pos_ =map_data.max_x_ - width_frame_ -1;
+    }
+
+
+
+    if(y_pos_> map_data.max_y_)
+    {
+        come_back_time_=60;
     }
 
 

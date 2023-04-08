@@ -1,6 +1,7 @@
 #ifndef COMMONFUNC_H_INCLUDED
 #define COMMONFUNC_H_INCLUDED
 
+#include <vector>
 #include <windows.h>
 #include <string>
 #include <SDL.h>
@@ -8,12 +9,15 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include<iostream>
+#include<winuser.h>
+
 static SDL_Window* g_window =NULL;
 static SDL_Renderer* g_screen =NULL;
 static SDL_Event g_event;
 
+
 //screen
-const int FPS =10;
+const int FPS =144;
 const int SCREEN_WIDTH =1500;
 const int SCREEN_HEIGHT =750;
 const int SCREEN_BPP =32;
@@ -51,5 +55,11 @@ typedef struct Map
     int tile[MAX_MAP_Y][MAX_MAP_X];
     char* file_name_;
 };
+
+namespace SDLCommonFunc
+{
+    bool CheckCollision(const SDL_Rect& object1,const SDL_Rect& object2);
+
+}
 
 #endif // COMMONFUNC_H_INCLUDED
