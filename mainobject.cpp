@@ -104,11 +104,11 @@ void MainObject::Show(SDL_Renderer* des)
 {
     if (status_ == WALK_LEFT)
     {
-        LoadImageA("img//player_left.png",des);
+        LoadImageA("player_left.png",des);
     }
     else
     {
-        LoadImageA("img//player_right.png",des);
+        LoadImageA("player_right.png",des);
     }
 
     if (input_type_.left_ ==1||
@@ -203,7 +203,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
         else if (events.button.button == SDL_BUTTON_LEFT)
         {
             BullerObject* p_buller =new BullerObject();
-            p_buller->LoadImageA("img//lazer.png", screen);
+            p_buller->LoadImageA("lazer.png", screen);
 
             if(status_== WALK_LEFT)
             {
@@ -286,7 +286,7 @@ void MainObject::DoPlayer(Map& map_data)
         if(on_ground_ == true)
         {
 
-        y_val_+=150;
+        y_val_+=PLAYER_DOWN_VAL;
 
 
         }
@@ -416,7 +416,7 @@ void MainObject::CheckToMap(Map& map_data)
 
     if(y_pos_> map_data.max_y_)
     {
-        come_back_time_=60;
+        come_back_time_=10;
     }
 
 

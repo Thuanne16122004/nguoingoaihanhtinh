@@ -19,7 +19,7 @@
 1680908227 c:\users\admin\downloads\flappybird\gamesdl2\baseobject.h
 	"commonfunc.h"
 
-1680950276 source:c:\users\admin\downloads\flappybird\gamesdl2\main.cpp
+1681027788 source:c:\users\admin\downloads\flappybird\gamesdl2\main.cpp
 	<iostream>
 	"commonfunc.h"
 	"baseobject.h"
@@ -30,20 +30,20 @@
 	"theatsobject.h"
 	"textobject.h"
 
-1680934358 source:c:\users\admin\downloads\flappybird\gamesdl2\gamemap.cpp
+1681027749 source:c:\users\admin\downloads\flappybird\gamesdl2\gamemap.cpp
 	"gamemap1.h"
 
 1680608181 c:\users\admin\downloads\flappybird\gamesdl2\gamemap1.h
 	"commonfunc.h"
 	"baseobject.h"
 
-1680950045 c:\users\admin\downloads\flappybird\gamesdl2\mainobject.h
+1681030091 c:\users\admin\downloads\flappybird\gamesdl2\mainobject.h
 	<vector>
 	"commonfunc.h"
 	"baseobject.h"
 	"bullerobject.h"
 
-1680949743 source:c:\users\admin\downloads\flappybird\gamesdl2\mainobject.cpp
+1681030091 source:c:\users\admin\downloads\flappybird\gamesdl2\mainobject.cpp
 	"mainobject.h"
 	<string>
 
@@ -60,7 +60,7 @@
 	"baseobject.h"
 	"commonfunc.h"
 
-1680891151 c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.h
+1681027749 c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.h
 	"commonfunc.h"
 	"baseobject.h"
 	"mainobject.h"

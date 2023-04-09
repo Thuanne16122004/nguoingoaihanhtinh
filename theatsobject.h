@@ -2,8 +2,9 @@
 #define THEATSOBJECT_H_INCLUDED
 
 #define THEAT_FRAME_NUM 8
-#define GRAVITY_SPEED 16
+#define GRAVITY_SPEED 0
 #define MAX_FALL_SPEED 16
+
 
 
 #include"commonfunc.h"

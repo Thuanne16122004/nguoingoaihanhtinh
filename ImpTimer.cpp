@@ -15,7 +15,6 @@ ImpTimer::~ImpTimer()
 {
 
 }
-
 void ImpTimer::start()
 {
     is_started_ =true;
@@ -58,7 +57,7 @@ int  ImpTimer::get_ticks()
         }
         else
         {
-            return SDL_GetTicks()- 1,5*start_tick_;
+            return SDL_GetTicks()- start_tick_;
         }
     }
     return 0;

@@ -45,7 +45,7 @@ bool InitData()
         {
             success=false;
         }
-        font_time=TTF_OpenFont("img//dlxfont_.ttf",20);
+        font_time=TTF_OpenFont("dlxfont_.ttf",20);
         if(font_time == NULL)
         {
             success= false;
@@ -57,7 +57,7 @@ bool InitData()
 
 bool LoadBackground()
 {
-    bool ret = g_background.LoadImageA("img//backgroundnen.png", g_screen);
+    bool ret = g_background.LoadImageA("backgroundnen.png", g_screen);
     if (ret == false)
         return false;
 
@@ -86,7 +86,7 @@ std::vector<TheatsObject*> MakeTheatList()
         TheatsObject* p_theat =(theats_objs+i);
         if (p_theat != NULL)
         {
-            p_theat->LoadImageA("img//phi_thuyen_.png", g_screen);
+            p_theat->LoadImageA("phi_thuyen_.png", g_screen);
             p_theat->set_clips();
             p_theat->set_x_pos(500);
             p_theat->set_y_pos( 1500);
@@ -110,11 +110,11 @@ int main (int argc, char* argv[])
 
 
     GameMap game_map;
-    game_map.LoadMap("map/map.03.txt");
+    game_map.LoadMap("map.03.txt");
     game_map.LoadTiles(g_screen);
 
     MainObject p_player;
-    p_player.LoadImageA("img//player_right.png", g_screen);
+    p_player.LoadImageA("player_right.png", g_screen);
     p_player.set_clips();
 
 
@@ -189,7 +189,7 @@ if (bColl2==true)
     //show game time
     std::string str_time="Time: ";
     Uint32 time_val =SDL_GetTicks()/1000;
-    Uint32 val_time =250- time_val;
+    Uint32 val_time =240- time_val;
     if(val_time<=0)
 {
     if (MessageBoxA(NULL,"GAME OVER ","Information",MB_OK|MB_ICONSTOP)==IDOK)
