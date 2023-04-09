@@ -3,7 +3,7 @@
 
 #define THEAT_FRAME_NUM 8
 #define GRAVITY_SPEED 0
-#define MAX_FALL_SPEED 16
+#define MAX_FALL_SPEED 0
 
 
 

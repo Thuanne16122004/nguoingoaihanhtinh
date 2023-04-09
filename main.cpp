@@ -45,7 +45,7 @@ bool InitData()
         {
             success=false;
         }
-        font_time=TTF_OpenFont("dlxfont_.ttf",20);
+        font_time=TTF_OpenFont("dlxfont_.ttf",30);
         if(font_time == NULL)
         {
             success= false;
@@ -81,15 +81,15 @@ std::vector<TheatsObject*> MakeTheatList()
 {
     std::vector<TheatsObject*> list_theats;
     TheatsObject* theats_objs =new TheatsObject[20];
-    for(int i=0;i<20;i++)
+    for(int i=0;i<4;i++)
     {
         TheatsObject* p_theat =(theats_objs+i);
         if (p_theat != NULL)
         {
             p_theat->LoadImageA("phi_thuyen_.png", g_screen);
             p_theat->set_clips();
-            p_theat->set_x_pos(500);
-            p_theat->set_y_pos( 1500);
+            p_theat->set_x_pos(1000*i);
+            p_theat->set_y_pos( 600);
 
             list_theats.push_back(p_theat);
         }
@@ -189,7 +189,14 @@ if (bColl2==true)
     //show game time
     std::string str_time="Time: ";
     Uint32 time_val =SDL_GetTicks()/1000;
-    Uint32 val_time =240- time_val;
+    Uint32 val_time =100- time_val;
+
+    if(val_time<=10)
+    {
+        time_game.SetColor(TextObject::RED_COLOR);
+
+    }
+
     if(val_time<=0)
 {
     if (MessageBoxA(NULL,"GAME OVER ","Information",MB_OK|MB_ICONSTOP)==IDOK)

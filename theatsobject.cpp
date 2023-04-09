@@ -116,7 +116,7 @@ void TheatsObject::DoPlayer(Map& gMap)
     if (come_back_time_==0)
 {
     x_val_ =0;
-    y_val_ +=GRAVITY_SPEED;
+    y_val_ +=0;
     if(y_val_>= MAX_FALL_SPEED)
     {
         y_val_ =MAX_FALL_SPEED;
