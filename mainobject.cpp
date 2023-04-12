@@ -345,7 +345,7 @@ void MainObject::CheckToMap(Map& map_data)
     int height_min =height_frame_<TILE_SIZE ? height_frame_ :TILE_SIZE;
 
     x1 =(x_pos_ +x_val_)/TILE_SIZE;
-    x2 = (x_pos_+x_val_+width_frame_ -1)/TILE_SIZE;
+    x2 = (x_pos_+x_val_+width_frame_ -10)/TILE_SIZE;
 
     y1 =(y_pos_)/TILE_SIZE;
     y2 =(y_pos_+height_min -10)/TILE_SIZE;
@@ -354,21 +354,41 @@ void MainObject::CheckToMap(Map& map_data)
     {
         if(x_val_ >0)// main object is moving to right
         {
+
             if (map_data.tile[y1][x2]!= BLANK_TILE ||map_data.tile[y2][x2] != BLANK_TILE)
             {
                 x_pos_ = x2*TILE_SIZE;
                 x_pos_ -=width_frame_ +1;
                 x_val_ =0;
             }
+            if (map_data.tile[y1][x2]== BOMS_TILE ||map_data.tile[y2][x2] == BOMS_TILE)
+            {
+                SDL_Delay(1000);
+                y_pos_ =8500;
+                x_pos_ = 500;
+
+
+            }
+
         }
         else if(x_val_ <0)
         {
+
             if (map_data.tile[y1][x1]!= BLANK_TILE ||map_data.tile[y2][x1 != BLANK_TILE])
             {
                 x_pos_ =(x1+1)*TILE_SIZE;
                 x_val_ =0;
             }
+            if (map_data.tile[y1][x1]== BOMS_TILE ||map_data.tile[y2][x1] == BOMS_TILE)
+            {
+                SDL_Delay(1000);
+               y_pos_ =8500;
+                x_pos_ = 500;
+
+
+            }
         }
+
     }
     //check vertical
     int width_min =width_frame_<TILE_SIZE ? width_frame_ :TILE_SIZE;
@@ -382,6 +402,7 @@ void MainObject::CheckToMap(Map& map_data)
     {
         if(y_val_ >0)// main object is moving to right
         {
+
             if (map_data.tile[y2][x1]!= BLANK_TILE ||map_data.tile[y2][x2] != BLANK_TILE)
             {
                 y_pos_ = y2*TILE_SIZE;
@@ -389,13 +410,30 @@ void MainObject::CheckToMap(Map& map_data)
                 y_val_ =0;
                 on_ground_ =true;
             }
+             if (map_data.tile[y2][x1]== BOMS_TILE ||map_data.tile[y2][x2] == BOMS_TILE)
+            {
+                SDL_Delay(1000);
+                y_pos_ =8500;
+                x_pos_ = 500;
+
+            }
+
         }
         else if(y_val_ <0)
         {
+
             if (map_data.tile[y1][x1]!= BLANK_TILE ||map_data.tile[y1][x2] != BLANK_TILE)
             {
                 y_pos_ =(y1+1)*TILE_SIZE;
                 y_val_ =0;
+            }
+            if (map_data.tile[y1][x1]== BOMS_TILE ||map_data.tile[y1][x2] == BOMS_TILE)
+            {
+                SDL_Delay(1000);
+                y_pos_ =8500;
+                x_pos_ = 500;
+
+
             }
         }
     }

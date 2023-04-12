@@ -27,7 +27,7 @@ const int COLOR_KEY_G =175;
 const int COLOR_KEY_B =180;
 
 const int RENDER_DRAW_COLOR = 0Xff;
-
+#define BOMS_TILE 5
 #define BLANK_TILE 0
 #define TILE_SIZE 75
 
