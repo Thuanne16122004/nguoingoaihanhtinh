@@ -89,7 +89,7 @@ std::vector<TheatsObject*> MakeTheatList()
             p_theat->LoadImageA("phi_thuyen_.png", g_screen);
             p_theat->set_clips();
             p_theat->set_x_pos(1000*i);
-            p_theat->set_y_pos( 600);
+            p_theat->set_y_pos( 500);
 
             list_theats.push_back(p_theat);
         }
