@@ -39,11 +39,15 @@
 		<Unit filename="bullerobject.h" />
 		<Unit filename="commonfunc.cpp" />
 		<Unit filename="commonfunc.h" />
+		<Unit filename="explosionobject.cpp" />
+		<Unit filename="explosionobject.h" />
 		<Unit filename="gamemap.cpp" />
 		<Unit filename="gamemap1.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mainobject.cpp" />
 		<Unit filename="mainobject.h" />
+		<Unit filename="player_power.cpp" />
+		<Unit filename="player_power.h" />
 		<Unit filename="textobject.cpp" />
 		<Unit filename="textobject.h" />
 		<Unit filename="theatsobject.cpp" />

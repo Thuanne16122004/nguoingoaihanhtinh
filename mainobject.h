@@ -27,13 +27,14 @@ public:
 
     bool LoadImageA (std::string path, SDL_Renderer* screen);
     void Show(SDL_Renderer* des);
-    void HandelInputAction(SDL_Event events, SDL_Renderer* screen);
+    void HandelInputAction(SDL_Event events, SDL_Renderer* screen, Mix_Chunk* buller_sound[2]);
     void set_clips();
 
     void DoPlayer(Map& map_data);
     void CheckToMap(Map& map_data);
     void SetMapXY(const int map_x, int const map_y){map_x_ =map_x; map_y_=map_y;}
     void CenterEntityOnMap(Map& map_data);
+
     SDL_Rect GetRectFrame();
 
 
@@ -44,7 +45,9 @@ public:
 
      }
     std::vector<BullerObject*> get_buller_list() const {return p_buller_list_;}
-    void HandleBuller(SDL_Renderer*  des);
+    void HandleBuller(SDL_Renderer*  des, Mix_Chunk* buller_sound[2]);
+    void RemoveBuller(const int& idx);
+    void set_come_back_time(const int& cb_time){come_back_time_=cb_time;}
 
 private:
 

@@ -13,6 +13,11 @@ TheatsObject::TheatsObject()
     come_back_time_=0;
     so_anh=4;
 
+    animation_a_=0;
+    animation_b_=0;
+    input_type_.left_=1;
+    type_move_=STATIC_THREAT;
+
 
 }
 
@@ -27,7 +32,7 @@ bool TheatsObject::LoadImageA(std::string path,SDL_Renderer* screen)
 
     if (ret == true)
     {
-        width_frame_ = rect_.w/ 4;
+        width_frame_ = rect_.w/ 8;
         height_frame_ =rect_.h;
     }
     return ret;
@@ -97,7 +102,7 @@ void TheatsObject::Show(SDL_Renderer* des)
         rect_.x=x_pos_-map_x_;
         rect_.y=y_pos_-map_y_;
         frame_++;
-        if (frame_ >=4*4)
+        if (frame_ >=4*8)
     {
         frame_ =0;
     }
@@ -116,10 +121,19 @@ void TheatsObject::DoPlayer(Map& gMap)
     if (come_back_time_==0)
 {
     x_val_ =0;
-    y_val_ +=0;
+    y_val_ +=GRAVITY_SPEED;
     if(y_val_>= MAX_FALL_SPEED)
     {
         y_val_ =MAX_FALL_SPEED;
+    }
+
+    if (input_type_.left_==1)
+    {
+        x_val_-=THREAT_SPEED;
+    }
+    if (input_type_.right_==1)
+    {
+        x_val_+=THREAT_SPEED;
     }
 
     CheckToMap(gMap);
@@ -214,7 +228,106 @@ void TheatsObject::CheckToMap(Map& map_data)
     {
         x_pos_ =map_data.max_x_ - width_frame_ -1;
     }
+    if (y_pos_>map_data.max_y_)
+    {
+        come_back_time_=10;
+    }
 
 
 
 }
+
+void TheatsObject::ImpMoveType(SDL_Renderer* screen)
+{
+    if(type_move_==STATIC_THREAT)
+    {
+
+    }
+    else
+    {
+        if(on_ground_== true)
+        {
+            if (x_pos_>animation_b_)
+            {
+                input_type_.left_=1;
+                input_type_.right_=0;
+                LoadImageA("ghost_left.png", screen);
+            }
+            else if(x_pos_<animation_a_)
+            {
+                input_type_.left_=0;
+                input_type_.right_=1;
+                LoadImageA("ghost_right.png", screen);
+
+            }
+        }
+        else
+        {
+            if (input_type_.left_==1)
+            {
+                LoadImageA("ghost_left.png",screen);
+            }
+        }
+    }
+}
+
+void TheatsObject::InitBuller(BullerObject* p_buller,SDL_Renderer* screen)
+{
+    if (p_buller!= NULL)
+    {
+        p_buller->set_buller_type(BullerObject::DAN_TRON);
+        p_buller->LoadImgBuller(screen);
+        p_buller->set_is_move(true);
+        p_buller-> set_buller_dir(BullerObject::DIR_LEFT);
+        p_buller->SetRect(rect_.x+20,rect_.y+125);
+        p_buller->set_x_val(30);
+        buller_list_.push_back(p_buller);
+
+    }
+}
+void TheatsObject::RemoveBuller(const int& idx)
+{
+    int size =buller_list_.size();
+    if (size>0 && idx<size)
+    {
+        BullerObject* p_buller=buller_list_.at(idx);
+        buller_list_.erase(buller_list_.begin()+ idx);
+
+        if(p_buller)
+        {
+            delete p_buller;
+            p_buller=NULL;
+        }
+    }
+}
+void TheatsObject::MakeBuller(SDL_Renderer* screen, const int& x_limit,const int& y_limit)
+{
+    for (int i=0;i< buller_list_.size();i++)
+    {
+        BullerObject* p_buller=buller_list_.at(i);
+        if(p_buller !=NULL)
+        {
+            if(p_buller->get_is_move())
+            {
+                int buller_distance=rect_.x +width_frame_-p_buller->GetRect().x;
+                if(buller_distance<800&& buller_distance>0)
+                {
+                    p_buller->HandleMove(x_limit,y_limit);
+                    p_buller->Render(screen);
+
+                }
+                else
+                {
+                    p_buller->set_is_move(false);
+                }
+            }
+
+            else
+            {
+                p_buller->set_is_move(true);
+                p_buller->SetRect(this->rect_.x+20,this->rect_.y+125);
+            }
+        }
+    }
+}
+

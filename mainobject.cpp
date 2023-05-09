@@ -104,11 +104,11 @@ void MainObject::Show(SDL_Renderer* des)
 {
     if (status_ == WALK_LEFT)
     {
-        LoadImageA("player_left.png",des);
+        LoadImageA("threat_left.png",des);
     }
     else
     {
-        LoadImageA("player_right.png",des);
+        LoadImageA("threat_right.png",des);
     }
 
     if (input_type_.left_ ==1||
@@ -135,7 +135,7 @@ void MainObject::Show(SDL_Renderer* des)
     SDL_RenderCopy(des, p_object_, current_clip, &renderQuad);
 }
 
-void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
+void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk* buller_sound[2])
 {
     if (events.type == SDL_KEYDOWN)
     {
@@ -159,8 +159,11 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
             break;
             case SDLK_w:
                 {
-
+                    if(on_ground_)
+                    {
+                    Mix_PlayChannel(-1,buller_sound[2],0);
                     input_type_.jump_ =1;
+                    }
                 }
                 break;
                 case SDLK_s:
@@ -196,28 +199,58 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 
     if (events.type == SDL_MOUSEBUTTONDOWN)
     {
-        if (events.button.button == SDL_BUTTON_RIGHT)
-        {
-              input_type_.jump_ =1;
-        }
-        else if (events.button.button == SDL_BUTTON_LEFT)
+
+        if (events.button.button == SDL_BUTTON_LEFT)
         {
             BullerObject* p_buller =new BullerObject();
-            p_buller->LoadImageA("lazer.png", screen);
+            p_buller->set_buller_type(BullerObject::LASER);
+            p_buller->LoadImgBuller( screen);
+            Mix_PlayChannel(-1,buller_sound[0],0);
 
             if(status_== WALK_LEFT)
             {
                p_buller ->set_buller_dir(BullerObject::DIR_LEFT);
-               p_buller->SetRect(this->rect_.x-24,rect_.y+20);
+               p_buller->SetRect(this->rect_.x,rect_.y+45);
             }
             else
             {
                 p_buller->set_buller_dir(BullerObject::DIR_RIGHT);
-                p_buller->SetRect(this->rect_.x+24,rect_.y+20);
+                p_buller->SetRect(this->rect_.x+75,rect_.y+45);
             }
 
-            p_buller->SetRect(this->rect_.x+24,rect_.y+20);
-            p_buller->set_x_val(10);
+            p_buller->SetRect(this->rect_.x+75,rect_.y+45 );
+            p_buller->set_x_val(40);
+            p_buller->set_y_val(20);
+            p_buller->set_is_move(true);
+            p_buller_list_.push_back(p_buller);
+
+        }
+    }
+
+    if (events.type == SDL_MOUSEBUTTONDOWN)
+    {
+
+        if (events.button.button == SDL_BUTTON_RIGHT)
+        {
+            BullerObject* p_buller =new BullerObject();
+            p_buller->set_buller_type(BullerObject::DAN_TRON);
+            p_buller->LoadImgBuller( screen);
+            Mix_PlayChannel(-1,buller_sound[1],0);
+
+            if(status_== WALK_LEFT)
+            {
+               p_buller ->set_buller_dir(BullerObject::DIR_LEFT);
+               p_buller->SetRect(this->rect_.x-75,rect_.y+45);
+            }
+            else
+            {
+                p_buller->set_buller_dir(BullerObject::DIR_RIGHT);
+                p_buller->SetRect(this->rect_.x+75,rect_.y+45);
+            }
+
+            p_buller->SetRect(this->rect_.x+75,rect_.y+45);
+            p_buller->set_x_val(20);
+            p_buller->set_y_val(20);
             p_buller->set_is_move(true);
             p_buller_list_.push_back(p_buller);
 
@@ -225,7 +258,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
     }
 }
 
-void MainObject::HandleBuller(SDL_Renderer*  des)
+void MainObject::HandleBuller(SDL_Renderer*  des,Mix_Chunk* buller_sound[3])
 {
    for(int i=0; i<p_buller_list_.size();i++)
    {
@@ -249,7 +282,21 @@ void MainObject::HandleBuller(SDL_Renderer*  des)
        }
    }
 }
+void MainObject::RemoveBuller(const int& idx)
+{
+    int size =p_buller_list_.size();
+    if (size>0 && idx<size)
+    {
+        BullerObject* p_buller=p_buller_list_.at(idx);
+        p_buller_list_.erase(p_buller_list_.begin()+ idx);
 
+        if(p_buller)
+        {
+            delete p_buller;
+            p_buller=NULL;
+        }
+    }
+}
 void MainObject::DoPlayer(Map& map_data)
 {
     if(come_back_time_==0)
@@ -273,6 +320,7 @@ void MainObject::DoPlayer(Map& map_data)
     {
         if(on_ground_ == true)
         {
+
 
         y_val_-=PLAYER_JUMP_VAL;
 
@@ -321,7 +369,9 @@ void MainObject::CenterEntityOnMap(Map& map_data)
     {
         map_data.start_x_ =map_data.max_x_ -SCREEN_WIDTH;
     }
+
     map_data.start_y_= y_pos_ -(SCREEN_HEIGHT/2);
+
     if(map_data.start_y_ <0)
     {
         map_data.start_y_ =0;
@@ -358,7 +408,7 @@ void MainObject::CheckToMap(Map& map_data)
             if (map_data.tile[y1][x2]!= BLANK_TILE ||map_data.tile[y2][x2] != BLANK_TILE)
             {
                 x_pos_ = x2*TILE_SIZE;
-                x_pos_ -=width_frame_ +1;
+                x_pos_ -=width_frame_ +10;
                 x_val_ =0;
             }
             if (map_data.tile[y1][x2]== BOMS_TILE ||map_data.tile[y2][x2] == BOMS_TILE)

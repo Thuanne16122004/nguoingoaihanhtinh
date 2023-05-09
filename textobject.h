@@ -3,6 +3,7 @@
 
 
 #include"commonfunc.h"
+#include"baseobject.h"
 
 class TextObject
 {
@@ -36,6 +37,7 @@ public:
 
     void SetText(const std::string text){str_val_ =text;}
     std::string GetText() const {return str_val_;}
+
 
 private:
     std::string str_val_;

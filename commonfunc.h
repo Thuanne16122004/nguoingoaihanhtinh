@@ -10,10 +10,16 @@
 #include <SDL_mixer.h>
 #include<iostream>
 #include<winuser.h>
+#include"baseobject.h"
 
+static SDL_Renderer* g_img_menu= NULL;
 static SDL_Window* g_window =NULL;
 static SDL_Renderer* g_screen =NULL;
 static SDL_Event g_event;
+static Mix_Chunk* g_sound_buller[3];
+static Mix_Chunk* g_sound_exp[3];
+static Mix_Chunk* g_sound_roi[1];
+static Mix_Chunk* g_sound_jump[1];
 
 
 //screen
@@ -58,7 +64,10 @@ typedef struct Map
 
 namespace SDLCommonFunc
 {
+
     bool CheckCollision(const SDL_Rect& object1,const SDL_Rect& object2);
+
+
 
 }
 

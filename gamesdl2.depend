@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1680911681 source:c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.cpp
+1682004746 source:c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.cpp
 	"commonfunc.h"
 
-1681321581 c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.h
+1682005321 c:\users\admin\downloads\flappybird\gamesdl2\commonfunc.h
 	<vector>
 	<windows.h>
 	<string>
@@ -12,6 +12,7 @@
 	<SDL_mixer.h>
 	<iostream>
 	<winuser.h>
+	"baseobject.h"
 
 1680908010 source:c:\users\admin\downloads\flappybird\gamesdl2\baseobject.cpp
 	"baseobject.h"
@@ -19,7 +20,7 @@
 1680908227 c:\users\admin\downloads\flappybird\gamesdl2\baseobject.h
 	"commonfunc.h"
 
-1681048601 source:c:\users\admin\downloads\flappybird\gamesdl2\main.cpp
+1683650268 source:c:\users\admin\downloads\flappybird\gamesdl2\main.cpp
 	<iostream>
 	"commonfunc.h"
 	"baseobject.h"
@@ -29,6 +30,8 @@
 	"bullerobject.h"
 	"theatsobject.h"
 	"textobject.h"
+	"explosionobject.h"
+	"player_power.h"
 
 1681027749 source:c:\users\admin\downloads\flappybird\gamesdl2\gamemap.cpp
 	"gamemap1.h"
@@ -37,13 +40,13 @@
 	"commonfunc.h"
 	"baseobject.h"
 
-1681326297 c:\users\admin\downloads\flappybird\gamesdl2\mainobject.h
+1681928777 c:\users\admin\downloads\flappybird\gamesdl2\mainobject.h
 	<vector>
 	"commonfunc.h"
 	"baseobject.h"
 	"bullerobject.h"
 
-1681325046 source:c:\users\admin\downloads\flappybird\gamesdl2\mainobject.cpp
+1681982885 source:c:\users\admin\downloads\flappybird\gamesdl2\mainobject.cpp
 	"mainobject.h"
 	<string>
 
@@ -53,23 +56,25 @@
 	"Imptimer.h"
 	"commonfunc.h"
 
-1680723602 source:c:\users\admin\downloads\flappybird\gamesdl2\bullerobject.cpp
+1681929765 source:c:\users\admin\downloads\flappybird\gamesdl2\bullerobject.cpp
 	"bullerobject.h"
 
-1680615521 c:\users\admin\downloads\flappybird\gamesdl2\bullerobject.h
+1681563721 c:\users\admin\downloads\flappybird\gamesdl2\bullerobject.h
 	"baseobject.h"
 	"commonfunc.h"
 
-1681044338 c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.h
+1681923684 c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.h
+	"bullerobject.h"
 	"commonfunc.h"
 	"baseobject.h"
 	"mainobject.h"
 
-1681045109 source:c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.cpp
+1681939867 source:c:\users\admin\downloads\flappybird\gamesdl2\theatsobject.cpp
 	"theatsobject.h"
 
-1680943810 c:\users\admin\downloads\flappybird\gamesdl2\textobject.h
+1682005321 c:\users\admin\downloads\flappybird\gamesdl2\textobject.h
 	"commonfunc.h"
+	"baseobject.h"
 
 1680597711 c:\users\admin\downloads\flappybird\gamesdl2\game.h
 	<iostream>
@@ -77,6 +82,21 @@
 	<SDL_image.h>
 	<time.h>
 
-1680940823 source:c:\users\admin\downloads\flappybird\gamesdl2\textobject.cpp
+1682005321 source:c:\users\admin\downloads\flappybird\gamesdl2\textobject.cpp
 	"textobject.h"
+
+1681932501 source:c:\users\admin\downloads\flappybird\gamesdl2\explosionobject.cpp
+	"explosionobject.h"
+
+1681932451 c:\users\admin\downloads\flappybird\gamesdl2\explosionobject.h
+	"commonfunc.h"
+	"baseobject.h"
+	"bullerobject.h"
+
+1681980586 c:\users\admin\downloads\flappybird\gamesdl2\player_power.h
+	"commonfunc.h"
+	"baseobject.h"
+
+1681981167 source:c:\users\admin\downloads\flappybird\gamesdl2\player_power.cpp
+	"player_power.h"
 
